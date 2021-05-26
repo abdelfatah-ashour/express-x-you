@@ -6,7 +6,9 @@ import Error from 'next/error';
 import CheckoutStepper from '../components/CheckoutStepper';
 import Style from '../styles/card.module.css';
 
-export default function cart({ cart, error }) {
+export default function cart({ cart, error, cookies }) {
+    console.log('Error : ', error);
+    console.log('COOKIES : ', cookies);
     const [totalAmount, setTotalAmount] = useState(0);
     const [items, setItems] = useState([]);
 
@@ -118,14 +120,16 @@ export async function getServerSideProps(ctx) {
                     props: {
                         cart: data.message,
                         error: null,
+                        cookies: ctx.req,
                     },
                 };
             })
-            .catch(() => {
+            .catch(error => {
                 return {
                     props: {
                         cart: null,
-                        error: true,
+                        error: error,
+                        cookies: ctx.req,
                     },
                 };
             });

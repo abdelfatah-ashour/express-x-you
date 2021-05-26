@@ -176,7 +176,7 @@ module.exports = {
             const token = req.cookies.auth || req.cookies.user;
             if (!token) {
                 return res.status(401).json({
-                    message: '🔐 access denied',
+                    message: { msg: '🔐 access denied', cookies: req.cookies },
                 });
             }
             const decoded = await verify(
