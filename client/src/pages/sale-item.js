@@ -198,7 +198,7 @@ export default function CreateItem() {
 }
 
 export async function getServerSideRender(ctx) {
-  if (!ctx.req.cookies.auth) {
+  if (!ctx.req.cookies.user) {
     return {
       redirect: {
         destination: '/login',

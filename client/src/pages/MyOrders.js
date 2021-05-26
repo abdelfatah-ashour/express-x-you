@@ -43,7 +43,7 @@ export default function MyOrders({ orders, errorAPI }) {
 }
 
 export async function getServerSideProps(ctx) {
-  if (!ctx.req.cookies.auth) {
+  if (!ctx.req.cookies.user) {
     return {
       redirect: {
         destination: '/login',
