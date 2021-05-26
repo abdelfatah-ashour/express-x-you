@@ -8,10 +8,12 @@ import { loginValidate } from '../utilities/register-validation';
 import { useRouter } from 'next/router';
 import { ToastSuccess, ToastError, ToastWarning } from '../utilities/Toaster';
 import { set } from 'js-cookie';
-import { setCookie } from 'nookies';
+import Cookies from 'cookies';
 import Style from '../styles/Register.module.css';
 
 export default function login() {
+    const cookie = new Cookies();
+
     const Router = useRouter();
 
     const { Auth, setAuth } = useContext(AuthStore);
@@ -35,15 +37,15 @@ export default function login() {
             .then(async () => {
                 await axios.post('/api/auth/login', user).then(resp => {
                     setAuth({ ...Auth, isAuth: true });
-                    console.log('HEADERS : ' + resp.headers);
-                    console.log('RESPONSE : ' + resp);
+                    console.log('HEADERS : ', { ...resp.headers });
+                    console.log('RESPONSE : ', { ...resp });
                     if (resp.data.message.user.role === 0) {
-                        setCookie(null, 'user', resp.headers.authorization, {
-                            maxAge: 1 * 24 * 60 * 60,
-                            path: '/',
+                        cookie.set('user', resp.headers.authorization, {
                             httpOnly: true,
                             secure: true,
+                            maxAge: 1 * 24 * 60 * 60,
                             sameSite: 'none',
+                            path: '/',
                         });
 
                         set('pi', resp.data.message.user, {
@@ -55,12 +57,12 @@ export default function login() {
                     }
 
                     if (resp.data.message.user.role === 1) {
-                        setCookie(null, 'admin', resp.headers.authorization, {
-                            maxAge: 1 * 24 * 60 * 60,
-                            path: '/',
+                        cookie.set('admin', resp.headers.authorization, {
                             httpOnly: true,
                             secure: true,
+                            maxAge: 1 * 60 * 60,
                             sameSite: 'none',
+                            path: '/',
                         });
                         set('pi', resp.data.message.user, {
                             secure: false,
