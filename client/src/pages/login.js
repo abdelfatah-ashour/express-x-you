@@ -38,11 +38,10 @@ export default function login() {
                     console.log('RESPONSE : ', { ...resp });
                     if (resp.data.message.user.role === 0) {
                         set('auth', resp.headers.authorization, {
-                            httpOnly: true,
                             secure: true,
-                            sameSite: 'none',
-                            maxAge: 1 * 24 * 60 * 60,
+                            sameSite: 'Strict',
                             path: '/',
+                            expires: 1,
                         });
 
                         set('pi', resp.data.message.user, {
@@ -55,11 +54,10 @@ export default function login() {
 
                     if (resp.data.message.user.role === 1) {
                         set('admin', resp.headers.authorization, {
-                            httpOnly: true,
                             secure: true,
-                            sameSite: 'none',
-                            maxAge: 1 * 24 * 60 * 60,
+                            sameSite: 'Strict',
                             path: '/',
+                            expires: 1 / 24,
                         });
 
                         set('pi', resp.data.message.user, {
