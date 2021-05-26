@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import RowCard from '../components/RowCard';
 import axios from '../utilities/axios';
-import Error from 'next/error';
+// import Error from 'next/error';
 import CheckoutStepper from '../components/CheckoutStepper';
 import Style from '../styles/card.module.css';
 
 export default function cart({ cart, error, cookies }) {
     console.log('Error : ', error);
-    console.log('COOKIES : ', cookies);
+    console.log('COOKIES : ', { cookies });
     const [totalAmount, setTotalAmount] = useState(0);
     const [items, setItems] = useState([]);
 
@@ -88,13 +88,13 @@ export default function cart({ cart, error, cookies }) {
                         </div>
                     </div>
                 )}
-
-                {error && (
+                {/*
+                {!cart && (
                     <Error
                         statusCode={500}
                         title={'🥱 Something Went Wrong!'}
                     />
-                )}
+                )} */}
             </main>
         </Layout>
     );
@@ -128,7 +128,7 @@ export async function getServerSideProps(ctx) {
                 return {
                     props: {
                         cart: null,
-                        error: error.message,
+                        error: error,
                         cookies: ctx.req,
                     },
                 };

@@ -220,7 +220,14 @@ module.exports = {
             return next();
         } catch (error) {
             logger.error(error.message);
-            return res.status(500).json({ message: '🥱 ' + error.message });
+            return res
+                .status(500)
+                .json({
+                    message: {
+                        msg: '🥱 ' + error.message,
+                        cookies: req.cookies,
+                    },
+                });
         }
     },
 };
