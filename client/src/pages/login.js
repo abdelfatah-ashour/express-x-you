@@ -35,7 +35,8 @@ export default function login() {
             .then(async () => {
                 await axios.post('/api/auth/login', user).then(resp => {
                     setAuth({ ...Auth, isAuth: true });
-                    console.log(resp.headers);
+                    console.log('HEADERS : ' + resp.headers);
+                    console.log('RESPONSE : ' + resp);
                     if (resp.data.message.user.role === 0) {
                         setCookie(null, 'user', resp.headers.authorization, {
                             maxAge: 1 * 24 * 60 * 60,
@@ -75,6 +76,7 @@ export default function login() {
                 });
             })
             .catch(error => {
+                console.log(error);
                 if (!error.response) {
                     ToastWarning('🥱 something went wrong!');
                 } else {

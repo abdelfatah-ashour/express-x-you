@@ -31,7 +31,7 @@ require('./config/connect-database')(process.env.DATABASE_URI);
 
 app.use(
     cors({
-        origin: process.env.CLIENT_ID,
+        origin: process.env.CLIENT_URL,
         path: '/',
         credentials: true,
         exposedHeaders: ['authorization'],
@@ -55,6 +55,10 @@ if (process.env.NODE_ENV === 'development') {
     // get some info in dev mode
     app.use(morgan('dev'));
 }
+
+app.get('/', (req, res) => {
+    res.send('Hello world this is API for EXPRESS X YOU');
+});
 
 app.use('/api', require('./routes/user-routes'));
 app.use('/api', require('./routes/products-routes'));
