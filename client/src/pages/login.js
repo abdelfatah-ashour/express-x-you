@@ -8,11 +8,11 @@ import { loginValidate } from '../utilities/register-validation';
 import { useRouter } from 'next/router';
 import { ToastSuccess, ToastError, ToastWarning } from '../utilities/Toaster';
 import { set } from 'js-cookie';
-import Cookies from 'cookies';
+import Cookie from 'cookie-universal';
 import Style from '../styles/Register.module.css';
 
 export default function login() {
-    const cookie = new Cookies();
+    const cookie = Cookie();
 
     const Router = useRouter();
 
@@ -43,8 +43,8 @@ export default function login() {
                         cookie.set('user', resp.headers.authorization, {
                             httpOnly: true,
                             secure: true,
-                            maxAge: 1 * 24 * 60 * 60,
                             sameSite: 'none',
+                            maxAge: 1 * 24 * 60 * 60,
                             path: '/',
                         });
 
@@ -60,10 +60,11 @@ export default function login() {
                         cookie.set('admin', resp.headers.authorization, {
                             httpOnly: true,
                             secure: true,
-                            maxAge: 1 * 60 * 60,
                             sameSite: 'none',
+                            maxAge: 1 * 24 * 60 * 60,
                             path: '/',
                         });
+
                         set('pi', resp.data.message.user, {
                             secure: false,
                             path: '/',

@@ -34,7 +34,7 @@ app.use(
         origin: process.env.CLIENT_URL,
         path: '/',
         credentials: true,
-        exposedHeaders: ['authorization'],
+        exposedHeaders: ['authorization', 'Set-Cookie'],
     })
 );
 
