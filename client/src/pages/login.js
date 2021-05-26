@@ -8,11 +8,11 @@ import { loginValidate } from '../utilities/register-validation';
 import { useRouter } from 'next/router';
 import { ToastSuccess, ToastError, ToastWarning } from '../utilities/Toaster';
 import { set } from 'js-cookie';
-import Cookie from 'cookie-universal';
+import { useCookies } from 'react-cookie';
 import Style from '../styles/Register.module.css';
 
 export default function login() {
-    const cookie = Cookie();
+    const [setCookie] = useCookies(['auth']);
 
     const Router = useRouter();
 
@@ -40,7 +40,7 @@ export default function login() {
                     console.log('HEADERS : ', { ...resp.headers });
                     console.log('RESPONSE : ', { ...resp });
                     if (resp.data.message.user.role === 0) {
-                        cookie.set('user', resp.headers.authorization, {
+                        setCookie('auth', resp.headers.authorization, {
                             httpOnly: true,
                             secure: true,
                             sameSite: 'none',
@@ -57,7 +57,7 @@ export default function login() {
                     }
 
                     if (resp.data.message.user.role === 1) {
-                        cookie.set('admin', resp.headers.authorization, {
+                        setCookie('admin', resp.headers.authorization, {
                             httpOnly: true,
                             secure: true,
                             sameSite: 'none',
