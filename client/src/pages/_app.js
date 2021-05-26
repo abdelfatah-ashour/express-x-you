@@ -9,22 +9,19 @@ import '../styles/Navbar.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'swiper/swiper-bundle';
 import 'swiper/swiper-bundle.css';
-import { CookiesProvider } from 'react-cookie';
 
 export default function App(props) {
     const { Component, pageProps } = props;
 
     return (
-        <CookiesProvider>
-            <AuthProvider>
-                <OrderProvider>
-                    <CartProvider>
-                        <CreateItemProvider>
-                            <Component {...pageProps} />
-                        </CreateItemProvider>
-                    </CartProvider>
-                </OrderProvider>
-            </AuthProvider>
-        </CookiesProvider>
+        <AuthProvider>
+            <OrderProvider>
+                <CartProvider>
+                    <CreateItemProvider>
+                        <Component {...pageProps} />
+                    </CreateItemProvider>
+                </CartProvider>
+            </OrderProvider>
+        </AuthProvider>
     );
 }
