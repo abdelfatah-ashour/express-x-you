@@ -98,6 +98,7 @@ module.exports = {
                 // same password send cookie with in header
                 const token = accessTokenUser({ _id: isUser._id });
                 res.setHeader(
+                    'Set-Cookie',
                     serialize('auth', token, {
                         httpOnly: process.env.NODE_ENV === 'production',
                         secure: process.env.NODE_ENV === 'production',
@@ -131,6 +132,7 @@ module.exports = {
                 });
 
                 res.setHeader(
+                    'Set-Cookie',
                     serialize('admin', token, {
                         httpOnly: process.env.NODE_ENV === 'production',
                         secure: process.env.NODE_ENV === 'production',
