@@ -1,0 +1,52 @@
+.TopTrend {
+  height: 270px;
+}
+
+.labelTop {
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.labelTop::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0.5rem;
+  width: 3rem;
+  height: 0.5rem;
+  border-bottom: 2px groove var(--firstColor);
+}
+
+.OneTrend {
+  border-bottom: 2px solid var(--firstColor);
+  position: relative;
+  overflow: hidden;
+}
+
+.wrapperImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapperImg img {
+  width: 100%;
+  height: auto;
+}
+
+.wrapperInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  color: var(--secondFontColor);
+  font-size: 0.8rem;
+  padding: 0.5rem;
+}

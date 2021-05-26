@@ -1,0 +1,158 @@
+.cardItem {
+  height: 350px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  shape-outside: margin-box;
+  overflow: hidden;
+  box-shadow: 0 0 0.1rem var(--firstColor);
+  background-color: var(--fourColor);
+}
+
+.currentColor {
+  position: absolute;
+  top: -0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  width: 2.5rem;
+  height: 1.2rem;
+  border: 1px dotted transparent;
+  border-left: 1px dotted #121212;
+  border-bottom: 1px dotted #121212;
+  border-right: 1px dotted #121212;
+  border-radius: 0.5rem;
+}
+
+.currentColor::before {
+  content: attr(data-color);
+  position: absolute;
+  background-color: #fff;
+  border: 1px dotted #121212;
+  top: -2.5rem;
+  left: -15%;
+  visibility: hidden;
+  padding: 0.2rem;
+}
+
+.currentColor:hover {
+  cursor: pointer !important;
+  transition: all 0.3s;
+}
+
+.currentColor:hover::before {
+  visibility: visible;
+  transition: all 0.3s;
+}
+
+.imageOfCard {
+  position: absolute;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.imageOfCard img {
+  width: 100%;
+  height: auto;
+}
+
+.cardItem:hover .itemDetails {
+  visibility: visible;
+  z-index: 99;
+  transition: pall 0.5s;
+}
+
+.optionList {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--thirdColor);
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+  z-index: 999;
+}
+
+.optionList div {
+  padding: 0.25rem;
+  color: var(--secondFontColor);
+}
+
+.optionList div:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: all 0.3s;
+}
+
+.optionList div:nth-of-type(1) {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.itemDetails {
+  background-color: var(--thirdColor);
+  color: var(--secondFontColor);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  visibility: hidden;
+  z-index: 2;
+}
+
+.itemDetails:hover {
+  color: var(--secondFontColor);
+}
+
+.infoAboutItem {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: var(--secondColor);
+  color: var(--secondFontColor);
+  padding: 0.5rem;
+  z-index: 2;
+  visibility: visible;
+}
+
+.cardItem:hover .infoAboutItem {
+  visibility: hidden;
+}
+
+.price {
+  font-size: 150%;
+  font-weight: bolder;
+  padding-bottom: 1.5rem;
+  line-height: 2;
+}
+
+.rowCart {
+  border: 1 solid var(--firstColor);
+  box-shadow: 0 0 0.3rem var(--secondColor);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.containerImg {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  width: 110px;
+  height: 110px;
+  margin: auto;
+}
+
+.containerImg img {
+  width: 100%;
+  height: auto;
+}
+
+.wrapperCheckout {
+  min-height: 7rem;
+}

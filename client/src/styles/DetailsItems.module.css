@@ -1,0 +1,53 @@
+.mainDetails {
+  min-height: 500px;
+  padding: 1rem;
+  margin-top: 3rem;
+}
+
+.TopDetails {
+  min-height: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.Image {
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+}
+
+.listDetails {
+  list-style: none;
+  min-height: 300px;
+}
+.listDetails li {
+  margin-bottom: 0.75rem;
+}
+
+.Color {
+  width: 2rem;
+  height: 1rem;
+  padding: 0.2rem 1.1rem;
+  border: 1px solid var(--firstColor);
+  margin: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.Option {
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.authenticateAlert {
+  box-shadow: 0 0 0.5rem var(--firstColor);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  align-content: center;
+}

@@ -1,0 +1,61 @@
+{
+  "Categories": ["electronics"],
+  "sectionsOfElectronics": ["mobiles", "laptops", "camera", "tv"],
+  "brandOfMobiles": ["apple", "samsung", "huawie", "realme", "oppo"],
+  "brandOfTV": ["samsung", "lg", "hisense"],
+  "brandOfLaptop": ["apple", "samsung", "hp", "dell"],
+  "brandOfCamera": ["KODAK", "Canon"],
+  "sizeOfMemoryMobile": ["8G", "16G", "32G", "64G", "128G", "256G", "512G"],
+  "sizeOfHardComputer": ["512M", "1G", "2G", "4G"],
+  "sizeOfRam": ["512M", "1G", "2G", "4G", "6G", "4G", "8G", "16G", "32G"],
+  "inchOfLaptops": [
+    "14INCH",
+    "15.6INCH",
+    "17INCH",
+    "19INCH",
+    "21INCH",
+    "29INCH",
+    "32INCH",
+    "42INCH"
+  ],
+
+  "inchOfTV": [
+    "32INCH",
+    "39INCH",
+    "42INCH",
+    "49INCH",
+    "52INCH",
+    "55INCH",
+    "65INCH",
+    "72INCH"
+  ],
+  "typeOfDisplayTv": ["AMOLED", "OLED", "LED", "QLED"],
+  "colors": [
+    "ffffff",
+    "313131",
+    "000000",
+    "ccc888",
+    "805906",
+    "3f2b01",
+    "ffaf01",
+    "fff111",
+    "daabf0",
+    "aa90e6",
+    "6727fc",
+    "8400c2",
+    "38104b",
+    "085fff",
+    "2b008f"
+  ],
+  "videoCaptureResolution": [
+    "8K UHD 4320p",
+    "4K 2160p",
+    "FHD 1520p",
+    "FHD 1080p",
+    "FHD 1080i",
+    "HD 720p",
+    "SD 480p",
+    "240p"
+  ],
+  "effectiveMegapixels": ["9.9 ", "14.9", "19.9", "24.9", "29.9", "39.9", "40"]
+}

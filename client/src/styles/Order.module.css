@@ -1,0 +1,134 @@
+.parentOneOrder {
+  border: 2px solid var(--firstColor);
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 0 0.5rem var(--secondColor);
+}
+
+.CloseInfo {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: var(--firstColor) !important;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--firstFontColor);
+}
+
+.CloseInfo:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.oneOrder {
+  border-radius: 0.5rem;
+  min-height: 7rem;
+  filter: drop-shadow(0 0 4px var(--secondColor));
+}
+
+.stateOrder {
+  border-radius: 0.5rem;
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.stateOrder button {
+  font-size: 2.5rem;
+  padding: 0.5rem;
+  color: var(--firstFontColor);
+  z-index: 999;
+  margin-bottom: 0.5rem;
+}
+
+.stateOrder:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.infoIcon {
+  font-size: 1.2rem;
+}
+
+.infoIcon:hover {
+  cursor: pointer;
+  background-color: var(--firstFontColor);
+  transition: all 0.5s;
+}
+
+.parentDetailsOrder {
+  width: 85%;
+  min-height: 350px;
+  max-height: 350px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  position: fixed;
+  margin: auto;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: var(--secondColor);
+  color: var(--secondFontColor);
+  z-index: 999;
+  border-radius: 0.5rem;
+  overflow-y: scroll;
+}
+
+.parentDetailsOrder button {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  color: var(--firstFontColor);
+}
+
+.wrapperOneItem {
+  width: 100%;
+}
+
+.wrapperImage {
+  height: 110px;
+  width: 110px;
+  border-radius: 0.5rem;
+}
+
+.wrapperImage img {
+  width: 100%;
+  height: auto;
+}
+
+.wrapperInfo {
+  list-style: none;
+}
+
+@media (max-width: 575.5px) {
+  .stateOrder button {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .stateOrder button {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 765.5px) {
+  .stateOrder button {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 991.5px) {
+  .stateOrder button {
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,39 @@
+.Footer {
+  width: 100%;
+  min-height: 300px;
+  background-color: var(--firstColor);
+  color: var(--secondFontColor);
+}
+
+.listFooter {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.listFooter h6 {
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.listFooter h6::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  margin: 0 auto;
+  height: 2px;
+  width: 3rem;
+  background-color: var(--fourColor);
+}
+
+.listFooter a {
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+  color: var(--secondFontColor);
+}
+
+.linksMedia a {
+  color: var(--secondFontColor);
+}

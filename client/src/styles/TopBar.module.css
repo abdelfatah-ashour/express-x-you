@@ -1,0 +1,95 @@
+.listSocialMedia {
+  list-style: none;
+  display: flex;
+}
+
+.listSocialMedia li a {
+  font-size: 1.2rem;
+  color: var(--firstColor);
+}
+
+.listSocialMedia li:hover a {
+  color: var(--secondFontColor);
+}
+
+.dropdownMenu {
+  min-width: 12.5rem;
+  box-shadow: 0 0 0.25rem var(--secondColor);
+  transform: translate(-160px, 65px) !important;
+}
+
+.dropdownMenu li {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.dropdownMenu li a {
+  text-decoration: none;
+  color: var(--secondFontColor);
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+
+.cartIcon a {
+  color: var(--firstColor);
+  border: 0;
+  outline: 0;
+  font-size: 2rem;
+  padding: 0;
+}
+
+.profileIcon a {
+  color: var(--firstColor);
+  border: 0;
+  outline: 0;
+  font-size: 2rem;
+  padding: 0;
+}
+
+.options .toggle,
+.notification .toggle {
+  background-color: #fff;
+  color: var(--firstColor);
+  border: 0;
+  outline: 0;
+  font-size: 2rem;
+  padding: 0;
+}
+
+.options .toggle::after,
+.notification .toggle::after {
+  outline: 0;
+  border: 0;
+  content: none;
+}
+
+.dropDownToggle {
+  background-color: #fff;
+  color: var(--firstColor);
+  border: 0;
+  outline: 0;
+  font-size: 2rem;
+  padding: 0;
+}
+
+.dropDownToggle::after {
+  outline: 0;
+  border: 0;
+  content: none;
+}
+
+.dropDownToggle:focus,
+.notification .toggle:focus {
+  border: 0;
+}
+
+.seeMoreNotification {
+  border-top: 2px solid var(--firstColor);
+  border-radius: 0 !important;
+}
+
+.seeMoreNotification:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+}

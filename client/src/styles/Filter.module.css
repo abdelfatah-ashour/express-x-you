@@ -1,0 +1,47 @@
+.Filter {
+  border: 2px solid #000;
+  padding: 0.5rem;
+  width: 100%;
+  transition: all 0.5s;
+  position: relative;
+  margin: 0 auto;
+}
+
+.FIXED {
+  border: 2px solid #000;
+  position: fixed;
+  top: 1rem;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  padding: 0.25rem;
+  transition: all 0.5s;
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  z-index: 9999;
+}
+
+.BLOCK {
+  position: relative;
+}
+
+.colorInput {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0.25rem;
+  border: 1px dotted var(--secondFontColor);
+}
+
+.colorInput:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.brand > *:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+

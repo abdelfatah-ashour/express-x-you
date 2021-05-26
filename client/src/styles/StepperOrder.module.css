@@ -1,0 +1,49 @@
+.Stepper {
+  width: 75%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: var(--fourColor);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.tabStepper {
+  max-height: 4rem;
+  padding: 0.2rem 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.close {
+  position: absolute;
+  top: -1rem;
+  right: -0.5rem;
+}
+
+.close button {
+  font-size: 1rem;
+  border-radius: 100%;
+  line-height: 1.5;
+}
+
+.close:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.btnStepper {
+  font-size: 1.5rem;
+  border-radius: 100%;
+}

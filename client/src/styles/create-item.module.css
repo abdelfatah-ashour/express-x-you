@@ -1,0 +1,93 @@
+.createItem {
+  width: 80%;
+  min-height: 100vh;
+  margin: 0 auto;
+  justify-content: space-around;
+  transform: translateY(5rem);
+}
+.headOfCreateItem h6 {
+  font-size: 120%;
+  font-weight: 500;
+  text-decoration: underline wavy var(--firstColor) 4px;
+  font-family: 'Londrina Solid', cursive !important;
+}
+
+.formControl {
+  width: 45%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fileImage {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.fileImage label {
+  font-size: 1.2rem;
+}
+
+.fileImage label:hover {
+  cursor: pointer;
+}
+
+.listColors {
+  width: 45%;
+  height: 100%;
+  overflow: hidden;
+  padding: 2rem 0;
+}
+
+.listColors ul {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  justify-content: first baseline;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+}
+.listColors ul li {
+  border-radius: 50%;
+  border: 1px dotted var(--firstColor);
+  width: 2rem;
+  height: 2rem;
+  margin: 0.25rem;
+}
+
+.listColors ul li:hover {
+  cursor: pointer;
+  transition: all 0.35s;
+}
+
+.color {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px dotted var(--firstColor);
+  border-radius: 0.5rem;
+  text-align: center;
+  color: var(--firstColor);
+  align-items: center;
+  padding: 0.2rem;
+}
+
+@media (max-width: 576px) {
+  .createItem {
+    width: 100%;
+  }
+  .formControll {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .createItem {
+    width: 100%;
+  }
+  .formControll {
+    width: 100%;
+  }
+}

@@ -1,0 +1,30 @@
+.saleItem {
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem var(--firstColor);
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+@media (max-width: 575.5px) {
+  .saleItem {
+    width: 100%;
+  }
+}
+
+@media (max-width: 766.5px) {
+  .saleItem {
+    width: 100%;
+  }
+}
+
+@media (min-width: 767px) and (max-width: 918.5px) {
+  .saleItem {
+    width: 75%;
+  }
+}
+
+@media (min-width: 919px) {
+  .saleItem {
+    width: 50%;
+  }
+}
