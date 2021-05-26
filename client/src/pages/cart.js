@@ -128,7 +128,7 @@ export async function getServerSideProps(ctx) {
                 return {
                     props: {
                         cart: null,
-                        error: error,
+                        error: error.message,
                         cookies: ctx.req,
                     },
                 };
