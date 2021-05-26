@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import RowCard from '../components/RowCard';
-// import axios from '../utilities/axios';
+import axios from '../utilities/axios';
 import Error from 'next/error';
 import CheckoutStepper from '../components/CheckoutStepper';
 import Style from '../styles/card.module.css';
 
-export default function cart({ cart, error, cookies, headers }) {
-    console.log('COOKIES   : ', { cookies });
-    console.log('HEADERS   : ', { headers });
+export default function cart({ cart, error }) {
     const [totalAmount, setTotalAmount] = useState(0);
     const [items, setItems] = useState([]);
 
@@ -101,43 +99,35 @@ export default function cart({ cart, error, cookies, headers }) {
 }
 
 export async function getServerSideProps(ctx) {
-    // if (!ctx.req.cookies.auth) {
-    //   return {
-    //     redirect: {
-    //       destination: '/login',
-    //       permanent: false,
-    //     },
-    //   };
-    // } else {
-    //   return await axios
-    //     .get('/api/cart', {
-    //       headers: {
-    //         authorization: ctx.req.cookies.auth,
-    //       },
-    //     })
-    //     .then(({ data }) => {
-    //       return {
-    //         props: {
-    //           cart: data.message,
-    //           error: null,
-    //         },
-    //       };
-    //     })
-    //     .catch(() => {
-    //       return {
-    //         props: {
-    //           cart: null,
-    //           error: true,
-    //         },
-    //       };
-    //     });
-    // }
-    return {
-        props: {
-            cart: null,
-            error: null,
-            cookies: ctx.req.cookies,
-            headers: ctx.req.headers,
-        },
-    };
+    if (!ctx.req.cookies.user) {
+        return {
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            },
+        };
+    } else {
+        return await axios
+            .get('/api/cart', {
+                headers: {
+                    authorization: ctx.req.cookies.auth,
+                },
+            })
+            .then(({ data }) => {
+                return {
+                    props: {
+                        cart: data.message,
+                        error: null,
+                    },
+                };
+            })
+            .catch(() => {
+                return {
+                    props: {
+                        cart: null,
+                        error: true,
+                    },
+                };
+            });
+    }
 }

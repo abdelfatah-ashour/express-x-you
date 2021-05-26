@@ -15,11 +15,12 @@ import { socket } from '../utilities/Socket.io-client';
 import { ToastSuccess } from '../utilities/Toaster';
 import Style from '../styles/TopBar.module.css';
 import axios from '../utilities/axios';
-
+import { useRouter } from 'next/router';
 export default function TopBar() {
     const piCookie = getJSON('pi');
     const { Auth, setAuth } = useContext(AuthStore);
     const [Notification, setNotification] = useState([]);
+    const Router = useRouter();
 
     socket.on('newNotification', data => {
         setNotification([...Notification, data]);
@@ -41,6 +42,9 @@ export default function TopBar() {
                         role: false,
                     });
                     ToastSuccess(data.message);
+                    setTimeout(() => {
+                        Router.push('/');
+                    }, 500);
                 })
                 .catch(error => {
                     throw new Error(error);

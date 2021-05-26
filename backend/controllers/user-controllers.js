@@ -97,7 +97,15 @@ module.exports = {
             if (isUser.role === 0) {
                 // same password send cookie with in header
                 const token = accessTokenUser({ _id: isUser._id });
-
+                res.setHeader(
+                    serialize('auth', token, {
+                        httpOnly: process.env.NODE_ENV === 'production',
+                        secure: process.env.NODE_ENV === 'production',
+                        sameSite: 'none',
+                        path: '/',
+                        maxAge: 24 * 60 * 60,
+                    })
+                );
                 res.header('authorization', token)
                     .status(200)
                     .json({
@@ -121,6 +129,16 @@ module.exports = {
                     _id: isUser._id,
                     role: isUser.role,
                 });
+
+                res.setHeader(
+                    serialize('admin', token, {
+                        httpOnly: process.env.NODE_ENV === 'production',
+                        secure: process.env.NODE_ENV === 'production',
+                        sameSite: 'none',
+                        path: '/',
+                        maxAge: 60 * 60,
+                    })
+                );
 
                 res.header('authorization', token)
                     .status(200)
@@ -153,7 +171,7 @@ module.exports = {
     },
     isAuth: async (req, res, next) => {
         try {
-            const token = req.cookies.user || req.cookies.admin;
+            const token = req.cookies.auth || req.cookies.user;
             if (!token) {
                 return res.status(401).json({
                     message: '🔐 access denied',
@@ -179,7 +197,7 @@ module.exports = {
     },
     isAdmin: async (req, res, next) => {
         try {
-            const token = req.cookies.admin;
+            const token = req.cookies.admin || req.cookies.cAdmin;
             if (!token) {
                 return res.status(403).json({
                     message: '🔓 forbidden',

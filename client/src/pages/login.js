@@ -34,12 +34,10 @@ export default function login() {
             .then(async () => {
                 await axios.post('/api/auth/login', user).then(resp => {
                     setAuth({ ...Auth, isAuth: true });
-                    console.log('HEADERS : ', { ...resp.headers });
-                    console.log('RESPONSE : ', { ...resp });
                     if (resp.data.message.user.role === 0) {
-                        set('auth', resp.headers.authorization, {
+                        set('user', resp.headers.authorization, {
                             secure: true,
-                            sameSite: 'Strict',
+                            sameSite: 'none',
                             path: '/',
                             expires: 1,
                         });
@@ -53,7 +51,7 @@ export default function login() {
                     }
 
                     if (resp.data.message.user.role === 1) {
-                        set('admin', resp.headers.authorization, {
+                        set('cAdmin', resp.headers.authorization, {
                             secure: true,
                             sameSite: 'Strict',
                             path: '/',
@@ -74,7 +72,6 @@ export default function login() {
                 });
             })
             .catch(error => {
-                console.log(error);
                 if (!error.response) {
                     ToastWarning('🥱 something went wrong!');
                 } else {
