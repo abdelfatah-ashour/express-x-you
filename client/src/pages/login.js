@@ -8,12 +8,9 @@ import { loginValidate } from '../utilities/register-validation';
 import { useRouter } from 'next/router';
 import { ToastSuccess, ToastError, ToastWarning } from '../utilities/Toaster';
 import { set } from 'js-cookie';
-import { useCookies } from 'react-cookie';
 import Style from '../styles/Register.module.css';
 
 export default function login() {
-    const [setCookie] = useCookies(['auth']);
-
     const Router = useRouter();
 
     const { Auth, setAuth } = useContext(AuthStore);
@@ -40,7 +37,7 @@ export default function login() {
                     console.log('HEADERS : ', { ...resp.headers });
                     console.log('RESPONSE : ', { ...resp });
                     if (resp.data.message.user.role === 0) {
-                        setCookie('auth', resp.headers.authorization, {
+                        set('auth', resp.headers.authorization, {
                             httpOnly: true,
                             secure: true,
                             sameSite: 'none',
@@ -57,7 +54,7 @@ export default function login() {
                     }
 
                     if (resp.data.message.user.role === 1) {
-                        setCookie('admin', resp.headers.authorization, {
+                        set('admin', resp.headers.authorization, {
                             httpOnly: true,
                             secure: true,
                             sameSite: 'none',
