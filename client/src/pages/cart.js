@@ -99,7 +99,7 @@ export default function cart({ cart }) {
 }
 
 export async function getServerSideProps(ctx) {
-    if (!ctx.req.cookies.auth) {
+    if (!ctx.req.cookies.c_user) {
         return {
             redirect: {
                 destination: '/login',
@@ -110,7 +110,7 @@ export async function getServerSideProps(ctx) {
         return await axios
             .get('/api/cart', {
                 headers: {
-                    authorization: ctx.req.cookies.auth,
+                    authorization: ctx.req.cookies.c_user,
                 },
             })
             .then(({ data }) => {

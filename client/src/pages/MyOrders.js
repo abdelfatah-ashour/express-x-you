@@ -47,7 +47,7 @@ export default function MyOrders({ orders, errorAPI }) {
 }
 
 export async function getServerSideProps(ctx) {
-    if (!ctx.req.cookies.auth) {
+    if (!ctx.req.cookies.c_user) {
         return {
             redirect: {
                 destination: '/login',
@@ -57,7 +57,7 @@ export async function getServerSideProps(ctx) {
     } else {
         return await axios
             .get('/api/order', {
-                headers: { authorization: ctx.req.cookies.auth },
+                headers: { authorization: ctx.req.cookies.c_user },
             })
             .then(({ data }) => {
                 return {

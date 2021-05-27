@@ -110,18 +110,20 @@ module.exports = {
                         maxAge: 24 * 60 * 60,
                     })
                 );
-                res.status(200).json({
-                    message: {
-                        user: {
-                            _id: isUser._id,
-                            email: isUser.email,
-                            role: isUser.role,
-                            photoProfile: isUser.photoProfile,
-                            address: isUser.address,
+                res.header('authorization', token)
+                    .status(200)
+                    .json({
+                        message: {
+                            user: {
+                                _id: isUser._id,
+                                email: isUser.email,
+                                role: isUser.role,
+                                photoProfile: isUser.photoProfile,
+                                address: isUser.address,
+                            },
+                            msg: '🦄 you are welcome',
                         },
-                        msg: '🦄 you are welcome',
-                    },
-                });
+                    });
             }
 
             // admin
@@ -146,19 +148,21 @@ module.exports = {
                     })
                 );
 
-                res.status(200).json({
-                    message: {
-                        user: {
-                            _id: isUser._id,
-                            username: isUser.username,
-                            email: isUser.email,
-                            role: isUser.role,
-                            photoProfile: isUser.photoProfile,
-                            address: isUser.address,
+                res.header('authorization', token)
+                    .status(200)
+                    .json({
+                        message: {
+                            user: {
+                                _id: isUser._id,
+                                username: isUser.username,
+                                email: isUser.email,
+                                role: isUser.role,
+                                photoProfile: isUser.photoProfile,
+                                address: isUser.address,
+                            },
+                            msg: '🦄 you are welcome',
                         },
-                        msg: '🦄 you are welcome',
-                    },
-                });
+                    });
             }
         } catch (error) {
             logger.error(error.message);
@@ -201,7 +205,7 @@ module.exports = {
     },
     isAdmin: async (req, res, next) => {
         try {
-            const token = req.cookies.admin;
+            const token = req.cookies.admin || req.headers.authorization;
             if (!token) {
                 return res.status(403).json({
                     message: '🔓 forbidden',

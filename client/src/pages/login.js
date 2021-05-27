@@ -34,7 +34,14 @@ export default function login() {
             .then(async () => {
                 await axios.post('/api/auth/login', user).then(resp => {
                     setAuth({ ...Auth, isAuth: true });
+
                     if (resp.data.message.user.role === 0) {
+                        set('c_user', resp.headers.authorization, {
+                            sameSite: 'Strict',
+                            secure: true,
+                            expires: 1, // 1 day
+                            path: '/',
+                        });
                         set('pi', resp.data.message.user, {
                             secure: false,
                             path: '/',
@@ -44,6 +51,12 @@ export default function login() {
                     }
 
                     if (resp.data.message.user.role === 1) {
+                        set('c_admin', resp.headers.authorization, {
+                            sameSite: 'Strict',
+                            secure: true,
+                            expires: 1 / 24, // 1 hour
+                            path: '/',
+                        });
                         set('pi', resp.data.message.user, {
                             secure: false,
                             path: '/',
@@ -116,7 +129,7 @@ export default function login() {
 }
 
 export async function getServerSideRender(ctx) {
-    if (ctx.req.cookies.auth) {
+    if (ctx.req.cookies.c_user) {
         return {
             redirect: {
                 destination: '/',
