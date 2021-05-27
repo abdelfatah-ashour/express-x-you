@@ -114,7 +114,7 @@ export default function register() {
 }
 
 export async function getServerSideRender(ctx) {
-  if (ctx.req.cookies.user) {
+  if (ctx.req.cookies.auth) {
     return {
       redirect: {
         destination: '/',

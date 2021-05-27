@@ -102,25 +102,23 @@ module.exports = {
                     serialize('auth', token, {
                         httpOnly: process.env.NODE_ENV === 'production',
                         secure: process.env.NODE_ENV === 'production',
-                        sameSite: 'none',
+                        sameSite: 'strict',
                         path: '/',
                         maxAge: 24 * 60 * 60,
                     })
                 );
-                res.header('authorization', token)
-                    .status(200)
-                    .json({
-                        message: {
-                            user: {
-                                _id: isUser._id,
-                                email: isUser.email,
-                                role: isUser.role,
-                                photoProfile: isUser.photoProfile,
-                                address: isUser.address,
-                            },
-                            msg: '🦄 you are welcome',
+                res.status(200).json({
+                    message: {
+                        user: {
+                            _id: isUser._id,
+                            email: isUser.email,
+                            role: isUser.role,
+                            photoProfile: isUser.photoProfile,
+                            address: isUser.address,
                         },
-                    });
+                        msg: '🦄 you are welcome',
+                    },
+                });
             }
 
             // admin
@@ -136,27 +134,25 @@ module.exports = {
                     serialize('admin', token, {
                         httpOnly: process.env.NODE_ENV === 'production',
                         secure: process.env.NODE_ENV === 'production',
-                        sameSite: 'none',
+                        sameSite: 'strict',
                         path: '/',
                         maxAge: 60 * 60,
                     })
                 );
 
-                res.header('authorization', token)
-                    .status(200)
-                    .json({
-                        message: {
-                            user: {
-                                _id: isUser._id,
-                                username: isUser.username,
-                                email: isUser.email,
-                                role: isUser.role,
-                                photoProfile: isUser.photoProfile,
-                                address: isUser.address,
-                            },
-                            msg: '🦄 you are welcome',
+                res.status(200).json({
+                    message: {
+                        user: {
+                            _id: isUser._id,
+                            username: isUser.username,
+                            email: isUser.email,
+                            role: isUser.role,
+                            photoProfile: isUser.photoProfile,
+                            address: isUser.address,
                         },
-                    });
+                        msg: '🦄 you are welcome',
+                    },
+                });
             }
         } catch (error) {
             logger.error(error.message);
@@ -173,10 +169,10 @@ module.exports = {
     },
     isAuth: async (req, res, next) => {
         try {
-            const token = req.cookies.auth || req.cookies.user;
+            const token = req.cookies.auth || req.headers.authorization;
             if (!token) {
                 return res.status(401).json({
-                    message: { msg: '🔐 access denied', cookies: req.cookies },
+                    message: '🔐 access denied',
                 });
             }
             const decoded = await verify(
@@ -199,7 +195,7 @@ module.exports = {
     },
     isAdmin: async (req, res, next) => {
         try {
-            const token = req.cookies.admin || req.cookies.cAdmin;
+            const token = req.cookies.admin;
             if (!token) {
                 return res.status(403).json({
                     message: '🔓 forbidden',
@@ -220,14 +216,9 @@ module.exports = {
             return next();
         } catch (error) {
             logger.error(error.message);
-            return res
-                .status(500)
-                .json({
-                    message: {
-                        msg: '🥱 ' + error.message,
-                        cookies: req.cookies,
-                    },
-                });
+            return res.status(500).json({
+                message: '🥱 ' + error.message,
+            });
         }
     },
 };

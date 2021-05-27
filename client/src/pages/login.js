@@ -35,13 +35,6 @@ export default function login() {
                 await axios.post('/api/auth/login', user).then(resp => {
                     setAuth({ ...Auth, isAuth: true });
                     if (resp.data.message.user.role === 0) {
-                        set('user', resp.headers.authorization, {
-                            secure: true,
-                            sameSite: 'none',
-                            path: '/',
-                            expires: 1,
-                        });
-
                         set('pi', resp.data.message.user, {
                             secure: false,
                             path: '/',
@@ -51,13 +44,6 @@ export default function login() {
                     }
 
                     if (resp.data.message.user.role === 1) {
-                        set('cAdmin', resp.headers.authorization, {
-                            secure: true,
-                            sameSite: 'Strict',
-                            path: '/',
-                            expires: 1 / 24,
-                        });
-
                         set('pi', resp.data.message.user, {
                             secure: false,
                             path: '/',
@@ -66,16 +52,18 @@ export default function login() {
                         });
                     }
                     ToastSuccess(resp.data.message.msg);
-                    setTimeout(() => {
-                        Router.back();
-                    }, 1000);
+                    // setTimeout(() => {
+                    //     Router.back();
+                    // }, 1000);
                 });
             })
             .catch(error => {
                 if (!error.response) {
+                    console.log(error.message);
                     ToastWarning('🥱 something went wrong!');
                 } else {
                     ToastError('☢ ' + error.response.data.message);
+                    console.log(error.response.data.message);
                 }
             });
     };
@@ -128,7 +116,7 @@ export default function login() {
 }
 
 export async function getServerSideRender(ctx) {
-    if (ctx.req.cookies.user) {
+    if (ctx.req.cookies.auth) {
         return {
             redirect: {
                 destination: '/',

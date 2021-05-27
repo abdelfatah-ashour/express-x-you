@@ -18,7 +18,7 @@ export default function controlPanel({ orders, error }) {
 }
 
 export async function getServerSideProps(ctx) {
-    if (!ctx.req.cookies.cAdmin) {
+    if (!ctx.req.cookies.admin) {
         return {
             redirect: {
                 destination: '/login',
@@ -29,7 +29,7 @@ export async function getServerSideProps(ctx) {
         return await axios
             .get('/api/admin/order', {
                 headers: {
-                    admin: ctx.req.cookies.cAdmin,
+                    admin: ctx.req.cookies.admin,
                 },
             })
             .then(({ data }) => {

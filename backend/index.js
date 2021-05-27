@@ -6,10 +6,10 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const path = require('path');
 const morgan = require('morgan');
-const createServer = require('http').createServer(app);
+const server = require('http').createServer(app);
 const { logger } = require('./utilities/winston');
 
-require('./utilities/socket-io')(createServer);
+require('./utilities/socket-io')(server);
 
 // config ENV
 dotenv.config({
@@ -34,7 +34,15 @@ app.use(
         origin: process.env.CLIENT_URL,
         path: '/',
         credentials: true,
-        exposedHeaders: ['authorization', 'Set-Cookie'],
+        preflightContinue: true,
+        methods: ['POST', 'GET', 'UPDATE', 'DELETE', 'OPTION'],
+        exposedHeaders: [
+            'authorization',
+            'Set-Cookie',
+            'headers',
+            'cookies',
+            'cookie',
+        ],
     })
 );
 
@@ -60,6 +68,11 @@ app.get('/', (req, res) => {
     res.send('Hello world this is API for EXPRESS X YOU');
 });
 
+app.use((req, res, next) => {
+    console.log(req.headers);
+    next();
+});
+
 app.use('/api', require('./routes/user-routes'));
 app.use('/api', require('./routes/products-routes'));
 app.use('/api', require('./routes/cart-routes'));
@@ -67,7 +80,7 @@ app.use('/api', require('./routes/order-routes'));
 app.use('/api', require('./routes/admin-routes'));
 app.use('/api', require('./routes/wishlist-routes'));
 
-const PORT = process.env.PORT; // 9000
+const PORT = process.env.PORT || 9000; // 9000
 
 // start server with PORT 9000
-createServer.listen(PORT);
+server.listen(PORT);
