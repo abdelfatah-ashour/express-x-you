@@ -102,7 +102,10 @@ module.exports = {
                     serialize('auth', token, {
                         httpOnly: process.env.NODE_ENV === 'production',
                         secure: process.env.NODE_ENV === 'production',
-                        sameSite: 'strict',
+                        sameSite:
+                            process.env.NODE_ENV === 'production'
+                                ? 'none'
+                                : false,
                         path: '/',
                         maxAge: 24 * 60 * 60,
                     })
@@ -134,7 +137,10 @@ module.exports = {
                     serialize('admin', token, {
                         httpOnly: process.env.NODE_ENV === 'production',
                         secure: process.env.NODE_ENV === 'production',
-                        sameSite: 'strict',
+                        sameSite:
+                            process.env.NODE_ENV === 'production'
+                                ? 'none'
+                                : false,
                         path: '/',
                         maxAge: 60 * 60,
                     })
