@@ -40,8 +40,15 @@
   transition: all 0.5s;
 }
 
+.brand {
+  min-width: 7rem;
+}
+
 .brand > *:hover {
   cursor: pointer;
   transition: all 0.5s;
 }
 
+.dropdownMenu {
+  min-width: 7rem;
+}

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Layout from '../components/Layout';
-import FormControl from '../components/Create-Register-Control';
-import { registerValidate } from '../utilities/register-validation';
-import { useRouter } from 'next/router';
-import { ToastSuccess, ToastError, ToastWarning } from '../utilities/Toaster';
-import Style from '../styles/Register.module.css';
-import axios from '../utilities/axios';
+import React, { useState } from "react";
+import Link from "next/link";
+import Layout from "../components/Layout";
+import FormControl from "../components/Create-Register-Control";
+import { registerValidate } from "../utilities/register-validation";
+import { useRouter } from "next/router";
+import { ToastSuccess, ToastError, ToastWarning } from "../utilities/Toaster";
+import Style from "../styles/Register.module.css";
+import axios from "../utilities/axios";
 
 export default function register() {
   const Router = useRouter();
@@ -18,69 +18,71 @@ export default function register() {
     cPassword: null,
   });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     await registerValidate(user).then(async () => {
       await axios
-        .post('/api/auth/signup', user)
+        .post("/api/auth/signup", user)
         .then(({ data }) => {
           setTimeout(() => {
-            Router.push('/login');
+            Router.push("/login");
           }, 2000);
-          ToastSuccess('🚀 ' + data.message);
+          ToastSuccess("🚀 " + data.message);
         })
-        .catch(error => {
+        .catch((error) => {
           if (error.response) {
-            ToastError('☢ ' + error.response.data.message);
+            ToastError("☢ " + error.response.data.message);
+          } else if (error.request) {
+            ToastWarning("🥱 something went wrong!");
           } else {
-            ToastWarning('🥱 something went wrong!');
+            ToastWarning("🥱 something went wrong!");
           }
         });
     });
   };
 
   const usernameProps = {
-    type: 'text',
-    name: 'username',
-    id: 'idForUsername',
+    type: "text",
+    name: "username",
+    id: "idForUsername",
     handleChange,
-    label: 'username',
-    placeholder: 'Username',
+    label: "username",
+    placeholder: "Username",
   };
 
   const emailProps = {
-    type: 'email',
-    name: 'email',
-    id: 'idForEmail',
+    type: "email",
+    name: "email",
+    id: "idForEmail",
     handleChange,
-    label: 'email',
-    placeholder: 'Email',
+    label: "email",
+    placeholder: "Email",
   };
 
   const passwordProps = {
-    type: 'password',
-    name: 'password',
-    id: 'idForPassword',
+    type: "password",
+    name: "password",
+    id: "idForPassword",
     handleChange,
-    label: 'password',
-    placeholder: 'Password',
+    label: "password",
+    placeholder: "Password",
   };
 
   const cPasswordProps = {
-    type: 'password',
-    name: 'cPassword',
-    id: 'idForCPassword',
+    type: "password",
+    name: "cPassword",
+    id: "idForCPassword",
     handleChange,
-    label: 'confirm password',
-    placeholder: 'Confirm Password',
+    label: "confirm password",
+    placeholder: "Confirm Password",
   };
 
   return (
@@ -102,7 +104,7 @@ export default function register() {
             </button>
           </div>
           <span className="text-center my-2 py-2">
-            Already have account ?{' '}
+            Already have account ?{" "}
             <Link href="/login">
               <a>login</a>
             </Link>
@@ -117,7 +119,7 @@ export async function getServerSideRender(ctx) {
   if (ctx.req.cookies.c_user) {
     return {
       redirect: {
-        destination: '/',
+        destination: "/",
         permanent: false,
       },
     };

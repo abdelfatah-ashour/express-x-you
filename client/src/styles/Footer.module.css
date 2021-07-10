@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 300px;
   background-color: var(--firstColor);
-  color: var(--secondFontColor);
+  color: var(--firstFontColor);
 }
 
 .listFooter {
@@ -19,7 +19,7 @@
 }
 
 .listFooter h6::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   margin: 0 auto;
@@ -31,9 +31,25 @@
 .listFooter a {
   margin-bottom: 1rem;
   margin-left: 0.5rem;
+  color: var(--firstFontColor);
+}
+.listFooter a:hover {
   color: var(--secondFontColor);
+  transition: all 0.5s eas;
+  -webkit-transition: all 0.5s eas;
+  -moz-transition: all 0.5s eas;
+  -ms-transition: all 0.5s eas;
+  -o-transition: all 0.5s eas;
 }
 
 .linksMedia a {
+  color: var(--firstFontColor);
+}
+.linksMedia a:hover {
   color: var(--secondFontColor);
+  transition: all 0.5s eas;
+  -webkit-transition: all 0.5s eas;
+  -moz-transition: all 0.5s eas;
+  -ms-transition: all 0.5s eas;
+  -o-transition: all 0.5s eas;
 }

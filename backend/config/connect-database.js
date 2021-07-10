@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { logger } = require('../utilities/winston');
+const mongoose = require("mongoose");
+const { logger } = require("../utilities/winston");
 
 module.exports = async function connectToDatabase(uri) {
   await mongoose
@@ -8,9 +8,9 @@ module.exports = async function connectToDatabase(uri) {
       useUnifiedTopology: true,
     })
     .then(() => {
-      console.log('connected to db');
+      console.log("connected to db");
     })
-    .catch(error => {
+    .catch((error) => {
       logger.error(error.message);
     });
 };

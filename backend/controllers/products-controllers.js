@@ -28,7 +28,6 @@ module.exports = {
       const currentPage = +page - 1;
       const countSkip = page !== 'all' ? currentPage * limit : 0;
 
-      console.log(countSkip);
 
       await Product.find({
         category: category !== 'all' ? category : { $gt: '' },

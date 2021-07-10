@@ -46,7 +46,7 @@
 }
 
 .authenticateAlert {
-  box-shadow: 0 0 0.5rem var(--firstColor);
+  box-shadow: 0 0 0.5rem 0 var(--thirdColor);
   border-radius: 0.5rem;
   padding: 1rem;
   align-content: center;

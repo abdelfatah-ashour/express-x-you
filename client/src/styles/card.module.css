@@ -8,8 +8,9 @@
   margin-bottom: 2rem;
   shape-outside: margin-box;
   overflow: hidden;
-  box-shadow: 0 0 0.1rem var(--firstColor);
-  background-color: var(--fourColor);
+  box-shadow: 0 0 0.5rem 0 var(--thirdColor);
+  background-color: var(--secondColor);
+  padding: 0.5rem;
 }
 
 .currentColor {
@@ -20,17 +21,17 @@
   width: 2.5rem;
   height: 1.2rem;
   border: 1px dotted transparent;
-  border-left: 1px dotted #121212;
-  border-bottom: 1px dotted #121212;
-  border-right: 1px dotted #121212;
+  border-left: 1px dotted var(--firstColor);
+  border-bottom: 1px dotted var(--firstColor);
+  border-right: 1px dotted var(--firstColor);
   border-radius: 0.5rem;
 }
 
 .currentColor::before {
   content: attr(data-color);
   position: absolute;
-  background-color: #fff;
-  border: 1px dotted #121212;
+  background-color: var(--secondColor);
+  border: 1px dotted var(--firstColor);
   top: -2.5rem;
   left: -15%;
   visibility: hidden;
@@ -56,6 +57,7 @@
 .imageOfCard img {
   width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
 .cardItem:hover .itemDetails {
@@ -68,24 +70,32 @@
   position: absolute;
   top: 0;
   right: 0;
-  background-color: var(--thirdColor);
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
-  font-size: 1.2rem;
-  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: var(--firstColor);
+  border-radius: 0 0 0 0.5rem;
   z-index: 999;
+  -webkit-border-radius: 0 0 0 0.5rem;
+  -moz-border-radius: 0 0 0 0.5rem;
+  -ms-border-radius: 0 0 0 0.5rem;
+  -o-border-radius: 0 0 0 0.5rem;
 }
 
 .optionList div {
   padding: 0.25rem;
-  color: var(--secondFontColor);
+  color: var(--firstFontColor);
 }
 
 .optionList div:hover {
   cursor: pointer;
   transform: scale(1.2);
   transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
 }
 
 .optionList div:nth-of-type(1) {
@@ -95,7 +105,7 @@
 
 .itemDetails {
   background-color: var(--thirdColor);
-  color: var(--secondFontColor);
+  color: var(--firstFontColor);
   padding: 0.5rem;
   border-radius: 0.5rem;
   text-transform: uppercase;
@@ -105,7 +115,13 @@
 }
 
 .itemDetails:hover {
+  background-color: var(--secondColor);
   color: var(--secondFontColor);
+  transition: all 1s ease-out;
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -ms-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
 }
 
 .infoAboutItem {
@@ -126,7 +142,7 @@
 }
 
 .price {
-  font-size: 150%;
+  font-size: 1rem;
   font-weight: bolder;
   padding-bottom: 1.5rem;
   line-height: 2;

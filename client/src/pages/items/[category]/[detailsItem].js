@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react';
-import Link from 'next/link';
-import axios from '../../../utilities/axios';
-import Layout from '../../../components/Layout';
-import { API } from '../../../utilities/KEYS';
-import Style from '../../../styles/DetailsItems.module.css';
-import { AuthStore } from '../../../context-api/Auth.context';
-import StepperCheckout from '../../../components/CheckoutStepper';
-import Error from 'next/error';
+import React, { useContext, useState } from "react";
+import Link from "next/link";
+import axios from "../../../utilities/axios";
+import Layout from "../../../components/Layout";
+import { API } from "../../../utilities/KEYS";
+import Style from "../../../styles/DetailsItems.module.css";
+import { AuthStore } from "../../../context-api/Auth.context";
+import StepperCheckout from "../../../components/CheckoutStepper";
+import Error from "next/error";
 
 export default function detailsItem({ product, error }) {
   const { Auth } = useContext(AuthStore);
@@ -15,8 +15,8 @@ export default function detailsItem({ product, error }) {
   return (
     <Layout title={product.nameItem} description={product.description}>
       {product && (
-        <div className={Style.mainDetails + ' container'}>
-          <div className={Style.TopDetails + ' row'}>
+        <div className={Style.mainDetails + " container"}>
+          <div className={Style.TopDetails + " row"}>
             {!checked && (
               <>
                 <div className="col-lg-4 col-md-6 col-12">
@@ -30,7 +30,7 @@ export default function detailsItem({ product, error }) {
                 <ul
                   className={
                     Style.listDetails +
-                    ' col-lg-4 col-md-6 col-12 d-flex flex-column justify-content-center p-3'
+                    " col-lg-4 col-md-6 col-12 d-flex flex-column justify-content-center p-3"
                   }>
                   <li>
                     Name : <strong>{product.nameItem}</strong>
@@ -45,18 +45,18 @@ export default function detailsItem({ product, error }) {
                     Color :
                     <span
                       className={Style.Color}
-                      style={{ backgroundColor: '#' + product.color }}></span>
+                      style={{ backgroundColor: "#" + product.color }}></span>
                   </li>
                 </ul>
               </>
             )}
 
-            <div className={Style.Option + ' col-lg-4 col-md-6 col-12'}>
+            <div className={Style.Option + " col-lg-4 col-md-6 col-12"}>
               {!checked && (
                 <>
                   <button
                     className="btn btn-dark p-2 mb-3 mx-auto"
-                    onClick={() => console.log('add to cart')}>
+                    onClick={() => console.log("add to cart")}>
                     Add To Cart
                   </button>
                   <button
@@ -69,7 +69,7 @@ export default function detailsItem({ product, error }) {
 
               {!Auth.isAuth && checked && (
                 <div className={Style.authenticateAlert}>
-                  📛 Not Authorized !{'  '}
+                  📛 Not Authorized !{"  "}
                   <Link href="/login">
                     <a aria-details="login">Login</a>
                   </Link>
@@ -95,15 +95,15 @@ export default function detailsItem({ product, error }) {
                 <table
                   className="table"
                   style={{
-                    boxShadow: '0 0 .5rem var(--firstColor)',
-                    padding: '.5rem',
-                    borderRadius: '.5rem',
+                    boxShadow: "0 0 .5rem var(--firstColor)",
+                    padding: ".5rem",
+                    borderRadius: ".5rem",
                   }}>
                   <thead>
                     <tr>
                       <th
                         scope="col-3"
-                        style={{ borderRight: '1px solid  var(--firstColor)' }}>
+                        style={{ borderRight: "1px solid  var(--firstColor)" }}>
                         TITLE
                       </th>
                       <th scope="col-9">DESCRIPTION</th>
@@ -112,14 +112,14 @@ export default function detailsItem({ product, error }) {
                   <tbody>
                     <tr>
                       <td
-                        style={{ borderRight: '1px solid  var(--firstColor)' }}>
+                        style={{ borderRight: "1px solid  var(--firstColor)" }}>
                         Name
                       </td>
                       <td>{product.nameItem}</td>
                     </tr>
                     <tr>
                       <td
-                        style={{ borderRight: '1px solid  var(--firstColor)' }}>
+                        style={{ borderRight: "1px solid  var(--firstColor)" }}>
                         Price
                       </td>
                       <td>
@@ -128,26 +128,26 @@ export default function detailsItem({ product, error }) {
                     </tr>
                     <tr>
                       <td
-                        style={{ borderRight: '1px solid  var(--firstColor)' }}>
+                        style={{ borderRight: "1px solid  var(--firstColor)" }}>
                         Category
                       </td>
                       <td>{product.category}</td>
                     </tr>
                     <tr>
                       <td
-                        style={{ borderRight: '1px solid  var(--firstColor)' }}>
+                        style={{ borderRight: "1px solid  var(--firstColor)" }}>
                         Brand
                       </td>
                       <td>{product.brand}</td>
                     </tr>
 
                     {/* electronics */}
-                    {product.section === 'mobiles' && (
+                    {product.section === "mobiles" && (
                       <>
                         <tr>
                           <td
                             style={{
-                              borderRight: '1px solid  var(--firstColor)',
+                              borderRight: "1px solid  var(--firstColor)",
                             }}>
                             ROM Memory
                           </td>
@@ -156,7 +156,7 @@ export default function detailsItem({ product, error }) {
                         <tr>
                           <td
                             style={{
-                              borderRight: '1px solid  var(--firstColor)',
+                              borderRight: "1px solid  var(--firstColor)",
                             }}>
                             RAM Memory
                           </td>
@@ -165,12 +165,12 @@ export default function detailsItem({ product, error }) {
                       </>
                     )}
 
-                    {product.section === 'laptops' && (
+                    {product.section === "laptops" && (
                       <>
                         <tr>
                           <td
                             style={{
-                              borderRight: '1px solid  var(--firstColor)',
+                              borderRight: "1px solid  var(--firstColor)",
                             }}>
                             display inch
                           </td>
@@ -179,7 +179,7 @@ export default function detailsItem({ product, error }) {
                         <tr>
                           <td
                             style={{
-                              borderRight: '1px solid  var(--firstColor)',
+                              borderRight: "1px solid  var(--firstColor)",
                             }}>
                             size Of hard
                           </td>
@@ -188,7 +188,7 @@ export default function detailsItem({ product, error }) {
                         <tr>
                           <td
                             style={{
-                              borderRight: '1px solid  var(--firstColor)',
+                              borderRight: "1px solid  var(--firstColor)",
                             }}>
                             RAM
                           </td>
@@ -197,12 +197,12 @@ export default function detailsItem({ product, error }) {
                       </>
                     )}
 
-                    {product.section === 'tv' && (
+                    {product.section === "tv" && (
                       <>
                         <tr>
                           <td
                             style={{
-                              borderRight: '1px solid  var(--firstColor)',
+                              borderRight: "1px solid  var(--firstColor)",
                             }}>
                             Display Inch
                           </td>
@@ -211,7 +211,7 @@ export default function detailsItem({ product, error }) {
                         <tr>
                           <td
                             style={{
-                              borderRight: '1px solid  var(--firstColor)',
+                              borderRight: "1px solid  var(--firstColor)",
                             }}>
                             Display Type
                           </td>
@@ -220,12 +220,12 @@ export default function detailsItem({ product, error }) {
                       </>
                     )}
 
-                    {product.section === 'camera' && (
+                    {product.section === "camera" && (
                       <>
                         <tr>
                           <td
                             style={{
-                              borderRight: '1px solid  var(--firstColor)',
+                              borderRight: "1px solid  var(--firstColor)",
                             }}>
                             Effective Mega pixels with MP
                           </td>
@@ -234,7 +234,7 @@ export default function detailsItem({ product, error }) {
                         <tr>
                           <td
                             style={{
-                              borderRight: '1px solid  var(--firstColor)',
+                              borderRight: "1px solid  var(--firstColor)",
                             }}>
                             Video Capture Resolution
                           </td>
@@ -244,7 +244,7 @@ export default function detailsItem({ product, error }) {
                     )}
                     <tr>
                       <td
-                        style={{ borderRight: '1px solid  var(--firstColor)' }}>
+                        style={{ borderRight: "1px solid  var(--firstColor)" }}>
                         Description
                       </td>
                       <td>{product.description}</td>
@@ -256,14 +256,14 @@ export default function detailsItem({ product, error }) {
           )}
         </div>
       )}
-      {error && <Error statusCode={500} title={'something went wrong!'} />}
+      {error && <Error statusCode={500} title={"something went wrong!"} />}
     </Layout>
   );
 }
 
 export async function getServerSideProps(ctx) {
   return await axios
-    .get('/api/product/getOneProduct', {
+    .get("/api/product/getOneProduct", {
       params: {
         productId: ctx.query.detailsItem,
       },

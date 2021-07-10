@@ -1,12 +1,12 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import Style from '../styles/Filter.module.css';
+import React, { useEffect, useReducer, useState } from "react";
+import Style from "../styles/Filter.module.css";
 
 import {
   colors,
   brandOfMobiles,
   sectionsOfElectronics,
-} from '../components/create-item-components/create-item-data.json';
-import { useRouter } from 'next/router';
+} from "../components/create-item-components/create-item-data.json";
+import { useRouter } from "next/router";
 
 export default function Filter() {
   const Router = useRouter();
@@ -14,18 +14,18 @@ export default function Filter() {
 
   const [filtering, setFiltering] = useState({
     page: queries.page || 1,
-    section: queries.section || 'all',
-    price: queries.price || 'all',
-    color: queries.color || 'all',
-    brand: queries.brand || 'all',
-    date: queries.date || 'all',
+    section: queries.section || "all",
+    price: queries.price || "all",
+    color: queries.color || "all",
+    brand: queries.brand || "all",
+    date: queries.date || "all",
   });
 
   function fixedFilter(state, action) {
     switch (action.type) {
-      case 'FIXED':
+      case "FIXED":
         return (state = true);
-      case 'BLOCK':
+      case "BLOCK":
         return (state = false);
       default:
         return state;
@@ -34,58 +34,58 @@ export default function Filter() {
 
   const [FIXED, dispatch] = useReducer(fixedFilter, false);
 
-  const handleRangePrice = e => {
+  const handleRangePrice = (e) => {
     setFiltering({
       ...filtering,
       [e.target.name]: e.target.value,
     });
     Router.push(
       `/items/${queries.category}?section=${
-        queries.section ? queries.section : 'all'
+        queries.section ? queries.section : "all"
       }&price=${e.target.value}&color=${filtering.color}&brand=${
         filtering.brand
       }&date=${filtering.date}`
     );
   };
 
-  const handleChangeFilter = e => {
+  const handleChangeFilter = (e) => {
     setFiltering({
       ...filtering,
-      [e.target.getAttribute('name')]: e.target.getAttribute('id'),
+      [e.target.getAttribute("name")]: e.target.getAttribute("id"),
     });
-    switch (e.target.getAttribute('name')) {
-      case 'color':
+    switch (e.target.getAttribute("name")) {
+      case "color":
         return Router.push(
           `/items/${queries.category}?section=${
-            queries.section ? queries.section : 'all'
+            queries.section ? queries.section : "all"
           }&price=${filtering.price}&color=${e.target.getAttribute(
-            'id'
+            "id"
           )}&brand=${filtering.brand}&date=${filtering.date}`
         );
-      case 'section':
+      case "section":
         return Router.push(
           `/items/${queries.category}?section=${e.target.getAttribute(
-            'id'
+            "id"
           )}&price=${filtering.price}&color=${filtering.color}&brand=${
             filtering.brand
           }&date=${filtering.date}`
         );
 
-      case 'brand':
+      case "brand":
         return Router.push(
           `/items/${queries.category}?section=${
-            queries.section ? queries.section : 'all'
+            queries.section ? queries.section : "all"
           }&price=${filtering.price}&color=${
             filtering.color
-          }&brand=${e.target.getAttribute('id')}&date=${filtering.date}`
+          }&brand=${e.target.getAttribute("id")}&date=${filtering.date}`
         );
-      case 'date':
+      case "date":
         return Router.push(
           `/items/${queries.category}?section=${
-            queries.section ? queries.section : 'all'
+            queries.section ? queries.section : "all"
           }&price=${filtering.price}&color=${filtering.color}&brand=${
             filtering.brand
-          }&date=${e.target.getAttribute('id')}`
+          }&date=${e.target.getAttribute("id")}`
         );
       default:
         return null;
@@ -93,17 +93,17 @@ export default function Filter() {
   };
 
   useEffect(() => {
-    const filterRef = document.getElementById('filterRef');
+    const filterRef = document.getElementById("filterRef");
     if (window !== undefined) {
-      window.addEventListener('scroll', () => {
+      window.addEventListener("scroll", () => {
         if (window.scrollY - filterRef.scrollTop >= 250) {
-          dispatch({ type: 'FIXED' });
+          dispatch({ type: "FIXED" });
         } else {
-          dispatch({ type: 'BLOCK' });
+          dispatch({ type: "BLOCK" });
         }
       });
     }
-    return () => dispatch({ type: 'BLOCK' });
+    return () => dispatch({ type: "BLOCK" });
   }, []);
 
   return (
@@ -112,14 +112,14 @@ export default function Filter() {
         FIXED
           ? Style.FIXED
           : Style.BLOCK +
-            ' ' +
+            " " +
             Style.Filter +
-            ' ' +
-            ' row text-center justify-content-evenly align-items-center'
+            " " +
+            " row text-center justify-content-evenly align-items-center"
       }
       id="filterRef">
       {/* filter with section */}
-      <div className="col-md-3 col-6 mx-auto">
+      <div className="col-md-2 col-12 mx-auto">
         <div className="dropdown px-2">
           <button
             className="btn dropdown-toggle p-2"
@@ -133,7 +133,7 @@ export default function Filter() {
             <div className="row">
               <div
                 className={
-                  Style.brand + ' d-flex align-items-center col-md-6 col-12'
+                  Style.brand + " d-flex align-items-center col-md-6 col-12"
                 }>
                 <input
                   type="checkbox"
@@ -141,7 +141,7 @@ export default function Filter() {
                   className="mx-1"
                   id="all"
                   onChange={handleChangeFilter}
-                  checked={filtering.section === 'all'}
+                  checked={filtering.section === "all"}
                 />
                 <label className="mx-2" htmlFor="all">
                   ALL
@@ -151,7 +151,7 @@ export default function Filter() {
                 return (
                   <div
                     className={
-                      Style.brand + ' d-flex align-items-center col-md-6 col-12'
+                      Style.brand + " d-flex align-items-center col-md-6 col-12"
                     }
                     key={i}>
                     <input
@@ -174,7 +174,7 @@ export default function Filter() {
       </div>
 
       {/* filter with price */}
-      <div className="col-md-3 col-6 mx-auto">
+      <div className="col-md-2 col-12 mx-auto">
         <div className="dropdown px-2">
           <button
             className="btn dropdown-toggle p-2"
@@ -185,7 +185,7 @@ export default function Filter() {
             PRICE RANGE
           </button>
           <div
-            className={Style.dropdownMenu + ' dropdown-menu'}
+            className={Style.dropdownMenu + " dropdown-menu"}
             aria-labelledby="dropdownMenuButton1">
             <label htmlFor="priceId" className="p-2">
               MIN: 100 - MAX:1000
@@ -200,13 +200,13 @@ export default function Filter() {
               max="2000"
               onMouseUp={handleRangePrice}
             />
-            min range : {filtering.price === 'all' ? '00' : filtering.price} $
+            min range : {filtering.price === "all" ? "00" : filtering.price} $
           </div>
         </div>
       </div>
 
       {/* filter with color */}
-      <div className="col-md-3 col-6 mx-auto">
+      <div className="col-md-2 col-12 mx-auto">
         <div className="dropdown px-2">
           <button
             className="btn dropdown-toggle p-2"
@@ -217,12 +217,12 @@ export default function Filter() {
             COLOR
           </button>
           <div
-            className={Style.dropdownMenu + ' dropdown-menu'}
+            className={Style.dropdownMenu + " dropdown-menu"}
             aria-labelledby="dropdownMenuButton1">
             <div className="w-100 d-flex flex-wrap">
               <div
-                className={Style.colorInput + ' text-center'}
-                style={{ backgroundColor: '#fff' }}
+                className={Style.colorInput + " text-center"}
+                style={{ backgroundColor: "#fff" }}
                 id="all"
                 onMouseUp={handleChangeFilter}
                 name="color">
@@ -233,7 +233,7 @@ export default function Filter() {
                   <div
                     key={i}
                     className={Style.colorInput}
-                    style={{ backgroundColor: '#' + color }}
+                    style={{ backgroundColor: "#" + color }}
                     id={color}
                     onMouseUp={handleChangeFilter}
                     name="color"
@@ -246,8 +246,8 @@ export default function Filter() {
       </div>
 
       {/* filter with brand */}
-      <div className="col-md-3 col-6 mx-auto">
-        <div className={Style.dropdownMenu + ' dropdown'}>
+      <div className="col-md-2 col-12 mx-auto">
+        <div className={Style.dropdownMenu + " dropdown"}>
           <button
             className="btn dropdown-toggle p-2"
             type="button"
@@ -262,7 +262,7 @@ export default function Filter() {
             <div className="row">
               <div
                 className={
-                  Style.brand + ' d-flex align-items-center col-md-6 col-12'
+                  Style.brand + " d-flex align-items-center col-md-6 col-12"
                 }>
                 <input
                   type="checkbox"
@@ -270,7 +270,7 @@ export default function Filter() {
                   className="mx-1"
                   id="all"
                   onChange={handleChangeFilter}
-                  checked={filtering.brand === 'all'}
+                  checked={filtering.brand === "all"}
                 />
                 <label className="mx-2" htmlFor="all">
                   ALL
@@ -280,7 +280,7 @@ export default function Filter() {
                 return (
                   <div
                     className={
-                      Style.brand + ' d-flex align-items-center col-md-6 col-12'
+                      Style.brand + " d-flex align-items-center col-md-6 col-12"
                     }
                     key={i}>
                     <input
@@ -303,8 +303,8 @@ export default function Filter() {
       </div>
 
       {/* filter with size */}
-      <div className="col-md-3 col-6 mx-auto">
-        <div className={Style.dropdownMenu + ' dropdown'}>
+      <div className="col-md-2 col-12 mx-auto">
+        <div className={Style.dropdownMenu + " dropdown"}>
           <button
             className="btn dropdown-toggle p-2"
             type="button"
@@ -318,8 +318,8 @@ export default function Filter() {
             aria-labelledby="dropdownMenuButton1">
             <div className="d-flex flex-wrap">
               {[
-                { name: 'date', value: 'newest', label: 'newest' },
-                { name: 'date', value: 'oldest', label: 'oldest' },
+                { name: "date", value: "newest", label: "newest" },
+                { name: "date", value: "oldest", label: "oldest" },
               ].map((date, i) => {
                 return (
                   <div className="w-100" key={i}>

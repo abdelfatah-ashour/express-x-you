@@ -1,24 +1,24 @@
-import React, { useContext } from 'react';
-import Link from 'next/link';
-import Style from '../styles/card.module.css';
-import axios from '../utilities/axios';
-import { ToastSuccess, ToastWarning } from '../utilities/Toaster';
-import { RiHeartAddLine, RiAddLine } from 'react-icons/ri';
-import { AuthStore } from '../context-api/Auth.context';
-import { API } from '../utilities/KEYS';
+import React, { useContext } from "react";
+import Link from "next/link";
+import Style from "../styles/card.module.css";
+import axios from "../utilities/axios";
+import { ToastSuccess, ToastWarning } from "../utilities/Toaster";
+import { RiHeartAddLine, RiAddLine } from "react-icons/ri";
+import { AuthStore } from "../context-api/Auth.context";
+import { API } from "../utilities/KEYS";
 
 export default function Card({ product }) {
   const { _id, category, nameItem, price, imageItem, color } = product;
   const { Auth } = useContext(AuthStore);
 
-  const handleAddToCart = async productId => {
+  const handleAddToCart = async (productId) => {
     try {
       await axios
-        .post('/api/cart', { productId })
+        .post("/api/cart", { productId })
         .then(({ data }) => {
           ToastSuccess(data.message);
         })
-        .catch(error => {
+        .catch((error) => {
           if (!error.response) {
             throw new Error(error);
           } else {
@@ -26,34 +26,32 @@ export default function Card({ product }) {
           }
         });
     } catch (error) {
-      alert('something went wrong!');
+      alert("something went wrong!");
     }
   };
 
-  const handleAddToWishList = async id => {
-    try {
-      await axios
-        .post('/api/wishlist', { itemId: id })
-        .then(({ data }) => {
-          ToastSuccess(data.message);
-        })
-        .catch(error => {
-          if (!error.response) {
-            throw new Error(error);
-          } else {
-            ToastWarning(error.response.data.message);
-          }
-        });
-    } catch (error) {
-      alert('something went wrong!');
-    }
+  const handleAddToWishList = async (id) => {
+    await axios
+      .post("/api/wishlist", { itemId: id })
+      .then(({ data }) => {
+        ToastSuccess(data.message);
+      })
+      .catch((error) => {
+        if (!error.response) {
+          throw new Error(error);
+        } else if (error.request) {
+          ToastWarning(error.response.data.message);
+        } else {
+          ToastWarning(error.response.data.message);
+        }
+      });
   };
 
   return (
-    <div className={Style.cardItem + ' col-lg-2 col-sm-3 col-5 mx-2'}>
+    <div className={Style.cardItem + " col-lg-2 col-sm-3 col-5 mx-2"}>
       <div
         className={Style.currentColor}
-        style={{ backgroundColor: '#' + color }}
+        style={{ backgroundColor: "#" + color }}
         data-color="color"></div>
       <div className={Style.imageOfCard}>
         <img src={`${API}/${imageItem}`} alt={nameItem} loading="lazy" />

@@ -8,7 +8,7 @@
 }
 
 .labelTop::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0.5rem;
@@ -18,9 +18,9 @@
 }
 
 .OneTrend {
-  border-bottom: 2px solid var(--firstColor);
   position: relative;
   overflow: hidden;
+  border-bottom: 2px solid var(--secondColor);
 }
 
 .wrapperImg {
@@ -45,8 +45,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #fff;
-  color: var(--secondFontColor);
-  font-size: 0.8rem;
+  background-color: var(--firstColor);
+  color: var(--firstFontColor);
+  font-size: 1rem;
   padding: 0.5rem;
 }

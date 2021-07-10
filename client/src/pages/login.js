@@ -1,144 +1,144 @@
-import React, { useContext, useState } from 'react';
-import Layout from '../components/Layout';
-import Link from 'next/link';
-import FormControl from '../components/Create-Register-Control';
-import axios from '../utilities/axios';
-import { AuthStore } from '../context-api/Auth.context';
-import { loginValidate } from '../utilities/register-validation';
-import { useRouter } from 'next/router';
-import { ToastSuccess, ToastError, ToastWarning } from '../utilities/Toaster';
-import { set } from 'js-cookie';
-import Style from '../styles/Register.module.css';
+import React, { useContext, useState } from "react";
+import Layout from "../components/Layout";
+import Link from "next/link";
+import FormControl from "../components/Create-Register-Control";
+import axios from "../utilities/axios";
+import { AuthStore } from "../context-api/Auth.context";
+import { loginValidate } from "../utilities/register-validation";
+import { useRouter } from "next/router";
+import { ToastSuccess, ToastError, ToastWarning } from "../utilities/Toaster";
+import { set } from "js-cookie";
+import Style from "../styles/Register.module.css";
 
 export default function login() {
-    const Router = useRouter();
+  const Router = useRouter();
 
-    const { Auth, setAuth } = useContext(AuthStore);
+  const { Auth, setAuth } = useContext(AuthStore);
 
-    const [user, setUser] = useState({
-        email: null,
-        password: null,
+  const [user, setUser] = useState({
+    email: null,
+    password: null,
+  });
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const handleChange = e => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value,
-        });
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleSubmit = async e => {
-        e.preventDefault();
+    await loginValidate(user)
+      .then(async () => {
+        await axios.post("/api/auth/login", user).then((resp) => {
+          setAuth({ ...Auth, isAuth: true });
 
-        await loginValidate(user)
-            .then(async () => {
-                await axios.post('/api/auth/login', user).then(resp => {
-                    setAuth({ ...Auth, isAuth: true });
-
-                    if (resp.data.message.user.role === 0) {
-                        set('c_user', resp.headers.authorization, {
-                            sameSite: 'Strict',
-                            secure: true,
-                            expires: 1, // 1 day
-                            path: '/',
-                        });
-                        set('pi', resp.data.message.user, {
-                            secure: false,
-                            path: '/',
-                            sameSite: 'strict',
-                            expires: 1,
-                        });
-                    }
-
-                    if (resp.data.message.user.role === 1) {
-                        set('c_admin', resp.headers.authorization, {
-                            sameSite: 'Strict',
-                            secure: true,
-                            expires: 1 / 24, // 1 hour
-                            path: '/',
-                        });
-                        set('pi', resp.data.message.user, {
-                            secure: false,
-                            path: '/',
-                            sameSite: 'strict',
-                            expires: 1 / 24, // one hour
-                        });
-                    }
-                    ToastSuccess(resp.data.message.msg);
-                    // setTimeout(() => {
-                    //     Router.back();
-                    // }, 1000);
-                });
-            })
-            .catch(error => {
-                if (!error.response) {
-                    console.log(error.message);
-                    ToastWarning('🥱 something went wrong!');
-                } else {
-                    ToastError('☢ ' + error.response.data.message);
-                    console.log(error.response.data.message);
-                }
+          if (resp.data.message.user.role === 0) {
+            set("c_user", resp.headers.authorization, {
+              sameSite: "Strict",
+              secure: true,
+              expires: 1, // 1 day
+              path: "/",
             });
-    };
+            set("pi", resp.data.message.user, {
+              secure: false,
+              path: "/",
+              sameSite: "strict",
+              expires: 1,
+            });
+          }
 
-    const emailProps = {
-        type: 'email',
-        name: 'email',
-        id: 'idForEmail',
-        label: 'email address',
-        handleChange,
-        placeholder: 'Email Address',
-    };
+          if (resp.data.message.user.role === 1) {
+            set("c_admin", resp.headers.authorization, {
+              sameSite: "Strict",
+              secure: true,
+              expires: 1 / 24, // 1 hour
+              path: "/",
+            });
+            set("pi", resp.data.message.user, {
+              secure: false,
+              path: "/",
+              sameSite: "strict",
+              expires: 1 / 24, // one hour
+            });
+          }
+          ToastSuccess(resp.data.message.msg);
+          setTimeout(() => {
+            Router.back();
+          }, 1000);
+        });
+      })
+      .catch((error) => {
+        if (!error.response) {
+          ToastWarning("🥱 something went wrong!");
+        } else if (error.request) {
+          ToastError("☢ " + error.response.data.message);
+        } else {
+          ToastError("☢ " + error.response.data.message);
+        }
+      });
+  };
 
-    const passwordProps = {
-        type: 'password',
-        name: 'password',
-        id: 'idForPassword',
-        label: 'password',
-        handleChange,
-        placeholder: 'Password',
-    };
+  const emailProps = {
+    type: "email",
+    name: "email",
+    id: "idForEmail",
+    label: "email address",
+    handleChange,
+    placeholder: "Email Address",
+  };
 
-    return (
-        <Layout
-            title="Login"
-            description="register now to access more resources and can make more transaction with more one">
-            <div className={Style.form}>
-                <div className="col-12 d-flex flex-column justify-content-evenly align-items-center">
-                    <h3 className="text-center my-3 p-2">🔐 Login</h3>
-                    <FormControl {...emailProps} />
-                    <FormControl {...passwordProps} />
-                    <div className="d-flex w-75 my-2">
-                        <button
-                            className="btn btn-dark w-100 mx-auto p-2"
-                            onClick={handleSubmit}>
-                            submit
-                        </button>
-                    </div>
-                    <div className="text-center my-2 py-2">
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        you don't have account ?{' '}
-                        <Link href="/register">
-                            <a>Register</a>
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </Layout>
-    );
+  const passwordProps = {
+    type: "password",
+    name: "password",
+    id: "idForPassword",
+    label: "password",
+    handleChange,
+    placeholder: "Password",
+  };
+
+  return (
+    <Layout
+      title="Login"
+      description="register now to access more resources and can make more transaction with more one">
+      <div className={Style.form}>
+        <div className="col-12 d-flex flex-column justify-content-evenly align-items-center">
+          <h3 className="text-center my-3 p-2">🔐 Login</h3>
+          <FormControl {...emailProps} />
+          <FormControl {...passwordProps} />
+          <div className="d-flex w-75 my-2">
+            <button
+              className="btn btn-dark w-100 mx-auto p-2"
+              onClick={handleSubmit}>
+              submit
+            </button>
+          </div>
+          <div className="text-center my-2 py-2">
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            you don't have account ?{" "}
+            <Link href="/register">
+              <a>Register</a>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
 }
 
 export async function getServerSideRender(ctx) {
-    if (ctx.req.cookies.c_user) {
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
-        };
-    } else {
-        return {
-            props: {},
-        };
-    }
+  if (ctx.req.cookies.c_user) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {},
+    };
+  }
 }
